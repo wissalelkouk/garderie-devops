@@ -15,13 +15,16 @@ pipeline {
             }
         }
 
-        stage('Install') {
+       stage('Install') {
             steps {
-                dir('frontend') {
-                    sh 'npm install'
-                }
-            }
+        dir('frontend') {
+            sh 'npm config set fetch-timeout 600000'
+            sh 'npm config set fetch-retries 5'
+            sh 'npm config set fetch-retry-mintimeout 20000'
+            sh 'npm install --no-audit --no-fund'
         }
+    }
+}
 
         stage('Test') {
             steps {
