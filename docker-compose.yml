@@ -1,0 +1,24 @@
+services:
+  backend:
+    build: ./backend
+    container_name: garderie-backend
+    ports:
+      - "5000:5000"
+    networks:
+      - garderie-net
+
+  frontend:
+    build: ./frontend
+    container_name: garderie-frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - BACKEND_URL=http://backend:5000
+    depends_on:
+      - backend
+    networks:
+      - garderie-net
+
+networks:
+  garderie-net:
+    driver: bridge
