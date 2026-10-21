@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKERHUB_USER = 'TON_ID_DOCKERHUB'
+        DOCKERHUB_USER = 'wissl'
         FRONTEND_IMAGE = "${DOCKERHUB_USER}/garderie-frontend"
         BACKEND_IMAGE  = "${DOCKERHUB_USER}/garderie-backend"
         DOCKERHUB_CREDS = credentials('dockerhub-creds')
