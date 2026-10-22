@@ -1,24 +1,25 @@
 services:
   backend:
-    build: ./backend
-    container_name: garderie-backend
+    image: wissl/garderie-backend:latest
+    container_name: backend
     ports:
       - "5000:5000"
     networks:
       - garderie-net
+    restart: unless-stopped
 
   frontend:
-    build: ./frontend
-    container_name: garderie-frontend
-    ports:
-      - "3000:3000"
+    image: wissl/garderie-frontend:latest
+    container_name: frontend
     environment:
       - BACKEND_URL=http://backend:5000
+    ports:
+      - "3000:3000"
     depends_on:
       - backend
     networks:
       - garderie-net
+    restart: unless-stopped
 
 networks:
   garderie-net:
-    driver: bridge
